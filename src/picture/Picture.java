@@ -1,4 +1,6 @@
 package picture;
+// C:\Users\julia\.oracle_jre_usage\java_picture_processing_cyw115\images
+//getRGB(int x, int y) return you the value of color pixel at location (x,y).
 
 import java.awt.image.BufferedImage;
 
@@ -109,7 +111,7 @@ public class Picture {
   /**
    * Returns true if this Picture is graphically identical to the other one.
    * 
-   * @param other
+   * //@param other
    *          The other picture to compare to.
    * @return true iff this Picture is graphically identical to other.
    */
@@ -154,4 +156,6 @@ public class Picture {
     }
     return hashCode;
   }
+
+
 }

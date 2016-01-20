@@ -53,12 +53,12 @@ public class Process {
 
     }
     public void rotate90(){
-      int widthN = pic.getHeight();
-      int heightN = pic.getWidth();
-      Picture rotated90pic = Utils.createPicture(heightN, widthN);
-        for (int x = 0; x < widthN; x++) {
-          for (int y = 0; y < heightN; y++) {
-            rotated90pic.setPixel(x, heightN - 1 - y, pic.getPixel(x,y));
+      int width = pic.getHeight();
+      int height = pic.getWidth();
+      Picture rotated90pic = Utils.createPicture(height, width);
+        for (int x = 0; x < width; x++) {
+          for (int y = 0; y < height; y++) {
+            rotated90pic.setPixel(y, height - 1 - x, pic.getPixel(x,y));
             }
         }
      pic = rotated90pic;
@@ -116,9 +116,9 @@ public class Process {
       }
     }
     public void blur(){
+      // USE CONTAIN from Picture!!!
       int height = pic.getHeight();
       int width =  pic.getWidth();
-      //int numberOfPix = h * w;
       Picture blurPic = Utils.createPicture(width,height);
 
       for (int x = 1; x < width - 1; x++) {
