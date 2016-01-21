@@ -5,14 +5,16 @@ public class Process {
 
   private Picture pic;
 
-  public Picture getPicture(){
-    return pic;
-  }
 
     public Process(Picture pic){
 
       this.pic = pic;
   }
+
+  public Picture getPicture(){
+    return pic;
+  }
+
 
   public void invert(){
     int h = pic.getHeight();
@@ -24,9 +26,7 @@ public class Process {
         Color colorI = pic.getPixel(x, y);
         colorI = new Color(255 - colorI.getRed(),255 - colorI.getGreen(), 255 - colorI.getBlue());
         invertPic.setPixel(x, y, colorI);
-
         }
-
       }
     pic = invertPic;
   }
@@ -47,22 +47,22 @@ public class Process {
         grayPic.setPixel(x, y, pic.getPixel(x, y));
 
         }
-
       }
       pic = grayPic;
-
     }
+
     public void rotate90(){
-      int width = pic.getHeight();
-      int height = pic.getWidth();
+      int width = pic.getWidth();
+      int height = pic.getHeight();
       Picture rotated90pic = Utils.createPicture(height, width);
         for (int x = 0; x < width; x++) {
           for (int y = 0; y < height; y++) {
-            rotated90pic.setPixel(y, height - 1 - x, pic.getPixel(x,y));
+            rotated90pic.setPixel(height - 1 - y, x, pic.getPixel(x,y));
             }
         }
      pic = rotated90pic;
     }
+
     public void rotate180(){
       int widthN = pic.getWidth();
       int heightN = pic.getHeight();
@@ -70,26 +70,25 @@ public class Process {
 
       for (int x = 0; x < widthN; x++) {
         for (int y = 0; y < heightN; y++) {
-          rotated180pic.setPixel(widthN - 1 - x, heightN - 1 , pic.getPixel(x,y));
+          rotated180pic.setPixel(widthN - 1 - x, heightN - 1 - y , pic.getPixel(x,y));
         }
       }
       pic = rotated180pic;
-
     }
-    public void rotate270(){
-      int widthN = pic.getHeight();
-      int heightN = pic.getWidth();
-      Picture rotated270pic = Utils.createPicture(heightN, widthN);
 
-      for (int x = 0; x < widthN; x++) {
-        for (int y = 0; y < heightN; y++) {
-          rotated270pic.setPixel(widthN - 1, heightN - 1 - x , pic.getPixel(x,y));
+    public void rotate270(){
+      int height = pic.getHeight();
+      int width = pic.getWidth();
+      Picture rotated270pic = Utils.createPicture(height, width);
+
+      for (int x = 0; x < width; x++) {
+        for (int y = 0; y < height; y++) {
+          rotated270pic.setPixel(y, width - 1 - x , pic.getPixel(x,y));
         }
       }
       pic = rotated270pic;
-
-
     }
+
     public void flipHorizontal(){
       int widthN = pic.getWidth();
       int heightN = pic.getHeight();
@@ -101,8 +100,8 @@ public class Process {
         }
       }
       pic = flipH;
-
     }
+
     public void flipVertical() {
       int widthN = pic.getWidth();
       int heightN = pic.getHeight();
@@ -111,44 +110,47 @@ public class Process {
         for (int y = 0; y < heightN; y++) {
           flipV.setPixel(x, heightN - 1 - y, pic.getPixel(x, y));
         }
-        pic = flipV;
-
       }
+      pic = flipV;
     }
+
     public void blur(){
-      // USE CONTAIN from Picture!!!
-      int height = pic.getHeight();
-      int width =  pic.getWidth();
-      Picture blurPic = Utils.createPicture(width,height);
+    int height = pic.getHeight();
+    int width =  pic.getWidth();
+    Picture blurPic = Utils.createPicture(width,height);
 
-      for (int x = 1; x < width - 1; x++) {
-        for (int y = 1; y < height - 1; y++) {
-          for (int i = x - 1; i < x + 1 ; i++) {
-            for (int j = y - 1; j < y + 1; j++) {
-              int r = pic.getPixel(i, j).getRed();
-              int g = pic.getPixel(i, j).getGreen();
-              int b = pic.getPixel(i, j).getBlue();
-              int rN =+ r;
-              int gN =+ g;
-              int bN =+ b;
-              int avgR = rN/9;
-              int avgG = gN/9;
-              int avgB = bN/9;
-              pic.getPixel(x, y).setRed(avgR);
-              pic.getPixel(x, y).setGreen(avgG);
-              pic.getPixel(x, y).setBlue(avgB);
-
-              blurPic.setPixel(x, y, pic.getPixel(x, y));
-
-            }
+    for (int i = 0; i < width; i++) {
+      for (int j = 0; j < height; j++) {
+        if(i == 0 || i == width - 1 || j == height - 1 || j == 0){
+          Color boundary = pic.getPixel(i, j);
+          blurPic.setPixel(i, j, boundary);
+          } else {
+          int rN = 0;
+          int gN = 0;
+          int bN = 0;
+          for (int x = i - 1; x <= i + 1; x++) {
+            for (int y = j - 1; y <= j + 1; y++) {
+              int r = pic.getPixel(x, y).getRed();
+              int g = pic.getPixel(x, y).getGreen();
+              int b = pic.getPixel(x, y).getBlue();
+              rN += r;
+              gN += g;
+              bN += b;
 
           }
-
         }
 
+        int avgR = rN / 9;
+        int avgG = gN / 9;
+        int avgB = bN / 9;
+        Color avg = new Color(avgR, avgG, avgB);
+        blurPic.setPixel(i, j, avg);
       }
-      pic = blurPic;
-
     }
+  }
+  pic = blurPic;
 
-}
+        }
+      }
+
+
