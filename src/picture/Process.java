@@ -24,7 +24,8 @@ public class Process {
       for (int y = 0; y < pic.getHeight(); y++) {
 
         Color colorI = pic.getPixel(x, y);
-        colorI = new Color(255 - colorI.getRed(),255 - colorI.getGreen(), 255 - colorI.getBlue());
+        colorI = new Color(255 - colorI.getRed(),255 - colorI.getGreen(),
+                           255 - colorI.getBlue());
         invertPic.setPixel(x, y, colorI);
         }
       }
@@ -35,21 +36,17 @@ public class Process {
       int h = pic.getHeight();
       int w =  pic.getWidth();
       Picture grayPic = Utils.createPicture(w,h);
+
       for (int x = 0; x < w; x++) {
         for (int y = 0; y < h; y++) {
         int red = pic.getPixel(x, y).getRed();
         int green = pic.getPixel(x, y).getGreen();
         int blue = pic.getPixel(x, y).getBlue();
         int avg = (red + green + blue)/3;
-        /*pic.getPixel(x, y).setRed(avg);
-        pic.getPixel(x, y).setGreen(avg);
-        pic.getPixel(x, y).setBlue(avg);
-        */
+
         Color color = new Color(avg, avg, avg);
-        //grayPic.setPixel(x, y, pic.getPixel(x, y));
+
           grayPic.setPixel(x, y, color);
-
-
         }
       }
       pic = grayPic;
@@ -74,7 +71,8 @@ public class Process {
 
       for (int x = 0; x < widthN; x++) {
         for (int y = 0; y < heightN; y++) {
-          rotated180pic.setPixel(widthN - 1 - x, heightN - 1 - y , pic.getPixel(x,y));
+          rotated180pic.setPixel(widthN - 1 - x, heightN - 1 - y,
+                                 pic.getPixel(x,y));
         }
       }
       pic = rotated180pic;
@@ -149,10 +147,10 @@ public class Process {
         int avgB = bN / 9;
         Color avg = new Color(avgR, avgG, avgB);
         blurPic.setPixel(i, j, avg);
+        }
       }
     }
-  }
-  pic = blurPic;
+    pic = blurPic;
   }
 }
 
