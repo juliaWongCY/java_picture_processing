@@ -149,8 +149,7 @@ public class Process {
     }
   }
   pic = blurPic;
-
-        }
-      }
+  }
+}
 
 
