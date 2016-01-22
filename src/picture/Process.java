@@ -41,10 +41,14 @@ public class Process {
         int green = pic.getPixel(x, y).getGreen();
         int blue = pic.getPixel(x, y).getBlue();
         int avg = (red + green + blue)/3;
-        pic.getPixel(x, y).setRed(avg);
+        /*pic.getPixel(x, y).setRed(avg);
         pic.getPixel(x, y).setGreen(avg);
         pic.getPixel(x, y).setBlue(avg);
-        grayPic.setPixel(x, y, pic.getPixel(x, y));
+        */
+        Color color = new Color(avg, avg, avg);
+        //grayPic.setPixel(x, y, pic.getPixel(x, y));
+          grayPic.setPixel(x, y, color);
+
 
         }
       }

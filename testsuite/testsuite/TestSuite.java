@@ -27,11 +27,21 @@ public class TestSuite {
     assertEquals(Utils.loadPicture("images/black64x64.png"),
         runMain(tmpFolder, "grayscale", "images/black64x64.png"));
   }
+  @Test
+  public void grayscaleRainbow() throws IOException {
+    assertEquals(Utils.loadPicture("images/rainbowGS64x64doc.png"),
+            runMain(tmpFolder, "grayscale", "images/rainbow64x64doc.png"));
+  }
 
   @Test
   public void rotate90Green() throws IOException {
     assertEquals(Utils.loadPicture("images/green64x64R90doc.png"),
         runMain(tmpFolder, "rotate", "90", "images/green64x64doc.png"));
+  }
+  @Test
+  public void rotate270Blue() throws IOException {
+    assertEquals(Utils.loadPicture("images/blueR27064x32doc.png"),
+            runMain(tmpFolder, "rotate", "270", "images/blue64x32doc.png"));
   }
   @Test
   public void rotate180Blue() throws IOException {
@@ -44,6 +54,11 @@ public class TestSuite {
     assertEquals(Utils.loadPicture("images/green64x64FVdoc.png"),
         runMain(tmpFolder, "flip", "V", "images/green64x64doc.png"));
   }
+  @Test
+  public void flipHBlue() throws IOException {
+    assertEquals(Utils.loadPicture("images/blueFH64x32doc.png"),
+            runMain(tmpFolder, "flip", "H", "images/blue64x32doc.png"));
+  }
 
   @Test
   public void blurBWPatterns() throws IOException {
@@ -55,5 +70,6 @@ public class TestSuite {
     assertEquals(Utils.loadPicture("images/sunsetBlur64x32.png"),
             runMain(tmpFolder, "blur", "images/sunset64x32.png"));
   }
+
 
 }
